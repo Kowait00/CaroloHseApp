@@ -1,5 +1,6 @@
 package com.wacker.carolohseapp;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -67,8 +68,32 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+        //Start UDP receiver service
+        //Intent intent = new Intent(this, UdpReceiverService.class);
+        //startService(intent);
+
+
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        //Start UDP receiver service
+        Intent intent = new Intent(this, UdpReceiverService.class);
+        startService(intent);
+
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        //Stop UDP receiver service
+        Intent intent = new Intent(this, UdpReceiverService.class);
+        stopService(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

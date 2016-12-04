@@ -21,4 +21,22 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Velocity"
+        android:id="@+id/rawdata_velocity_label"
+        android:layout_below="@+id/section_label"
+        android:layout_toRightOf="@+id/section_label"
+        android:layout_toEndOf="@+id/section_label"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/rawdata_velocity_value"
+        android:layout_alignTop="@+id/rawdata_velocity_label"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView"/>
+
 </RelativeLayout>

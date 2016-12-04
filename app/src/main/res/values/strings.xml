@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CaroloHseApp</string>
+    <string name="app_name">it:movES</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 </resources>
