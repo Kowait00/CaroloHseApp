@@ -10,8 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.DatagramPacket;
@@ -27,9 +25,9 @@ public class UdpReceiverService extends Service
     static final public String UDPRECV_RESULT = "com.wacker.carolohseapp.UdpReceiverService.MESAGE_PROCESSED";
     static final public String UDPRECV_MESSAGE = "com.wacker.carolohseapp.UdpReceiverService.UDP_MESSAGE";
 
-    boolean currentlyReceiving = false;
-    PackageReceiver packRec = null;
-    LocalBroadcastManager broadcastManager = null;
+    private boolean mCurrentlyReceiving = false;
+    private PackageReceiver mPackRec = null;
+    private Context mContext = null;
 
     /**
      * Class for clients to access.  Because we know this service always
@@ -47,7 +45,7 @@ public class UdpReceiverService extends Service
     public void onCreate()
     {
         super.onCreate();
-        broadcastManager = LocalBroadcastManager.getInstance(this);
+        mContext = this.getApplicationContext();
     }
 
     @Override
@@ -57,11 +55,11 @@ public class UdpReceiverService extends Service
         Toast.makeText(UdpReceiverService.this, "UDP Receiver Service started", Toast.LENGTH_LONG).show();
 
         //AsyncTask zum Empfangen der UDP Multicast Packets starten
-        if(!currentlyReceiving)
+        if(!mCurrentlyReceiving)
         {
-            packRec = new PackageReceiver();
-            packRec.execute(8625);
-            currentlyReceiving = true;
+            mPackRec = new PackageReceiver();
+            mPackRec.execute(8625);
+            mCurrentlyReceiving = true;
         }
         return START_STICKY;
     }
@@ -70,10 +68,10 @@ public class UdpReceiverService extends Service
     public void onDestroy()
     {
         //super.onDestroy();
-        if(currentlyReceiving)
+        if(mCurrentlyReceiving)
         {
-            packRec.cancelNow();
-            currentlyReceiving = false;
+            mPackRec.cancelNow();
+            mCurrentlyReceiving = false;
         }
         Toast.makeText(UdpReceiverService.this, "UDP Receiver Service stopped", Toast.LENGTH_LONG).show();
     }
@@ -177,11 +175,10 @@ public class UdpReceiverService extends Service
         {
             if (byteMsg != null)
             {
-                Intent intent = new Intent(UDPRECV_RESULT);
-                //Intent intent = new Intent().setAction(UDPRECV_RESULT)
                 CaroloCarSensorData receivedData = new CaroloCarSensorData(byteMsg);
+                Intent intent = new Intent(UDPRECV_RESULT);
                 intent.putExtra(UDPRECV_MESSAGE, receivedData);
-                broadcastManager.sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 Log.d("UdpRecv", "Published retrieved car data via local broadcast");
             }
         }
