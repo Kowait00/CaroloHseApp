@@ -3,6 +3,7 @@ package com.wacker.carolohseapp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -15,6 +16,7 @@ import android.view.View;
  */
 public class CarTopDownView extends View
 {
+    private CaroloCarSensorData mCarData = new CaroloCarSensorData();
     private Paint mPaint = new Paint();
     private Drawable mImageTopDownCar;
     private float mImageTopDownCarAspectRatio;
@@ -41,8 +43,32 @@ public class CarTopDownView extends View
         int picBottomRightY = picTopLeftY + picHeight;
         Rect imageBounds = new Rect(picTopLeftX, picTopLeftY, picBottomRightX, picBottomRightY);
         mImageTopDownCar.setBounds(imageBounds);
-        mImageTopDownCar.draw(canvas);
 
+        // set up wheels for car
+        Paint wheelPaint = new Paint();
+        wheelPaint.setColor(Color.DKGRAY);
+        RectF wheelRearLeft = new RectF((float)(picTopLeftX), (float)(picBottomRightY-picHeight*0.3), (float)(picTopLeftX+picWidth/8), (float)(picBottomRightY-picHeight*0.1));
+        canvas.drawRect(wheelRearLeft, wheelPaint);
+        RectF wheelRearRight = new RectF((float)(picBottomRightX-picWidth/8), (float)(picBottomRightY-picHeight*0.3), (float)(picBottomRightX), (float)(picBottomRightY-picHeight*0.1));
+        canvas.drawRect(wheelRearRight, wheelPaint);
+
+
+        RectF wheelFrontLeft = new RectF((float)(picTopLeftX+picWidth/20), (float)(picTopLeftY+picHeight*0.1), (float)(picTopLeftX+picWidth/6), (float)(picTopLeftY+picHeight*0.28));
+        // Draw turing angle of the wheel (rotate canvas around wheel center to draw angled rectangle)
+        canvas.save();
+        canvas.rotate(mCarData.wheelAngle, wheelFrontLeft.centerX(), wheelFrontLeft.centerY());
+        canvas.drawRect(wheelFrontLeft, wheelPaint);
+        canvas.restore();
+
+        RectF wheelFrontRight = new RectF((float)(picBottomRightX-picWidth/6), (float)(picTopLeftY+picHeight*0.1), (float)(picBottomRightX-picWidth/20), (float)(picTopLeftY+picHeight*0.28));
+        // Draw turing angle of the wheel (rotate canvas around wheel center to draw angled rectangle)
+        canvas.save();
+        canvas.rotate(mCarData.wheelAngle, wheelFrontRight.centerX(), wheelFrontRight.centerY());
+        canvas.drawRect(wheelFrontRight, wheelPaint);
+        canvas.restore();
+
+        //Draw the car
+        mImageTopDownCar.draw(canvas);
 
         // set up the corners of an ellipse for displaying distance sensor information
         // in a way that it scales with the size of the vehicle graphic
@@ -61,10 +87,12 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the front distance sensors
-        paint.setColor(Color.GREEN);
+        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 30) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 210, 58, false, paint );
 
-        paint.setColor(Color.GREEN);
+        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 30) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 330, -58, false, paint );
 
         // Draw the second layer of arcs for the front distance sensors
@@ -72,10 +100,13 @@ public class CarTopDownView extends View
         float ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        paint.setColor(Color.GREEN);
+        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 60) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 210, 58, false, paint );
 
-        paint.setColor(Color.GREEN);
+
+        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 60) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 330, -58, false, paint );
 
         // Draw the third layer of arcs for the front distance sensors
@@ -83,15 +114,21 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        paint.setColor(Color.GREEN);
+        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 90) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 210, 58, false, paint );
 
-        paint.setColor(Color.GREEN);
+        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 90) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 330, -58, false, paint );
 
 
+    }
 
-
+    public void updateDisplayedData(CaroloCarSensorData carData)
+    {
+        mCarData = carData;
+        invalidate();
     }
 
 

@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
  */
 public class Tab1Visualization extends Fragment
 {
+    CarTopDownView mCarTopDownView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -25,7 +27,8 @@ public class Tab1Visualization extends Fragment
 
         //Set the car top down visuals view into the relative layout of the fragment
         RelativeLayout relativeLayout = (RelativeLayout) rootView.findViewById(R.id.visualizationLayout);
-        relativeLayout.addView(new CarTopDownView(getActivity()));
+        mCarTopDownView = new CarTopDownView(getActivity());
+        relativeLayout.addView(mCarTopDownView);
 
         return rootView;
     }
@@ -56,6 +59,8 @@ public class Tab1Visualization extends Fragment
             if(intent.getAction().equalsIgnoreCase(UdpReceiverService.UDPRECV_RESULT) )
             {
                 Log.d("Tab1", "Broadcast received");
+                CaroloCarSensorData carData = (CaroloCarSensorData) intent.getSerializableExtra(UdpReceiverService.UDPRECV_MESSAGE);
+                mCarTopDownView.updateDisplayedData(carData);
             }
         }
     };
