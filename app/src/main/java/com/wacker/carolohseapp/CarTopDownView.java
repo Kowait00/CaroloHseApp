@@ -5,9 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -122,6 +124,41 @@ public class CarTopDownView extends View
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 330, -58, false, paint );
 
+        // Draw compass
+        float compassCenterX = picTopLeftX+picWidth/2;
+        float compassCenterY = picBottomRightY-picHeight/4;
+        float compassRadius = picWidth/5;
+        Paint compassPaint = new Paint();
+        compassPaint.setColor(Color.DKGRAY);
+        compassPaint.setAntiAlias(true);
+        canvas.drawCircle(compassCenterX, compassCenterY, compassRadius, compassPaint);
+        // Draw N on north direction of compass
+        compassPaint.setStyle(Paint.Style.FILL);
+        compassPaint.setTextSize(compassRadius/3);
+        compassPaint.setTextAlign(Paint.Align.CENTER);
+        compassPaint.setColor(Color.WHITE);
+        canvas.drawText("N", compassCenterX, compassCenterY-(float)(compassRadius*0.7), compassPaint);
+        // Draw pointer triangles of the compass, with correct rotation
+        canvas.save();
+        canvas.rotate(mCarData.heading, compassCenterX, compassCenterY);
+        compassPaint = new Paint();
+        compassPaint.setColor(Color.WHITE);
+        Path path = new Path();
+        path.moveTo(compassCenterX, compassCenterY+compassRadius);
+        path.lineTo(compassCenterX+compassRadius/4, compassCenterY);
+        path.lineTo(compassCenterX-compassRadius/4, compassCenterY);
+        path.lineTo(compassCenterX, compassCenterY+compassRadius);
+        path.close();
+        canvas.drawPath(path, compassPaint);
+        compassPaint.setColor(Color.RED);
+        path = new Path();
+        path.moveTo(compassCenterX, compassCenterY-compassRadius);
+        path.lineTo(compassCenterX+compassRadius/4, compassCenterY);
+        path.lineTo(compassCenterX-compassRadius/4, compassCenterY);
+        path.lineTo(compassCenterX, compassCenterY-compassRadius);
+        path.close();
+        canvas.drawPath(path, compassPaint);
+        canvas.restore();
 
     }
 
