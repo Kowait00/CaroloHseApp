@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 /**
  * Created by wacke on 27.11.2016.
@@ -21,6 +22,11 @@ public class Tab1Visualization extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.tab1_visualization, container, false);
+
+        //Set the car top down visuals view into the relative layout of the fragment
+        RelativeLayout relativeLayout = (RelativeLayout) rootView.findViewById(R.id.visualizationLayout);
+        relativeLayout.addView(new CarTopDownView(getActivity()));
+
         return rootView;
     }
 
