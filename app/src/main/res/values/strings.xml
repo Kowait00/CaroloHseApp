@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">it:movES</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">App Info</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_info_heading">it:movES \nAndroid App</string>
+    <string name="dev_info_text">Entwickelt in 2016 \nvon Konstantin Wacker\n\nals Studienarbeit\nan der Hochschule Esslingen</string>
+    <string name="image_source_info_text">Grafik Pickup Truck: &#169;TRBRY\nhttp://opengameart.org/content/car-pickup</string>
 </resources>
