@@ -159,6 +159,8 @@ public class CarTopDownView extends View
         path.close();
         canvas.drawPath(path, compassPaint);
         canvas.restore();
+        compassPaint.setColor(Color.DKGRAY);
+        canvas.drawCircle(compassCenterX, compassCenterY, compassRadius/15, compassPaint);
 
     }
 

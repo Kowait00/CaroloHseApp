@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_generateTestData"
+        android:orderInCategory="100"
+        android:title="@string/action_test_data"
+        app:showAsAction="never"/>
 </menu>
