@@ -162,6 +162,32 @@ public class CarTopDownView extends View
         compassPaint.setColor(Color.DKGRAY);
         canvas.drawCircle(compassCenterX, compassCenterY, compassRadius/15, compassPaint);
 
+        // draw wheel speed labelling
+        Paint linePaint = new Paint();
+        linePaint.setColor(Color.argb(255, 0, 100, 215));
+        linePaint.setStyle(Paint.Style.STROKE);
+        linePaint.setStrokeCap(Paint.Cap.ROUND);
+        linePaint.setStrokeWidth(canvas.getWidth()/75);
+        path = new Path();
+        path.moveTo(wheelRearRight.centerX()+wheelRearRight.width()/2, wheelRearRight.centerY());
+        path.lineTo(wheelRearRight.centerX()+canvas.getWidth()/6, wheelRearRight.centerY()-wheelRearRight.height()/2);
+        path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/2);
+        canvas.drawPath(path, linePaint);
+        Paint labelPaint = new Paint();
+        labelPaint.setColor(Color.BLACK);
+        labelPaint.setTextSize(canvas.getWidth()/25);
+        labelPaint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawText( mCarData.velocity + " km/h", canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/4, labelPaint);
+
+        // draw turning angle labelling
+        path = new Path();
+        path.moveTo(wheelFrontRight.centerX()+wheelFrontRight.width()/2, wheelFrontRight.centerY());
+        path.lineTo(wheelFrontRight.centerX()+canvas.getWidth()/6, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
+        path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
+        canvas.drawPath(path, linePaint);
+        canvas.drawText( mCarData.wheelAngle + "°", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
+
+
     }
 
     public void updateDisplayedData(CaroloCarSensorData carData)
