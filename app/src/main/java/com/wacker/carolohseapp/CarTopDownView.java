@@ -251,7 +251,7 @@ public class CarTopDownView extends View
     public void updateDisplayedData(CaroloCarSensorData carData)
     {
         mCarData = carData;
-        invalidate();
+        //invalidate();
     }
 
 
