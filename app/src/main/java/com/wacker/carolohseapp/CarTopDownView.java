@@ -3,13 +3,13 @@ package com.wacker.carolohseapp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.shapes.OvalShape;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -18,17 +18,25 @@ import android.view.View;
  */
 public class CarTopDownView extends View
 {
+    private Context mContext;
     private CaroloCarSensorData mCarData = new CaroloCarSensorData();
     private Paint mPaint = new Paint();
     private Drawable mImageTopDownCar;
     private float mImageTopDownCarAspectRatio;
+    private int mTireTreadTextureId = 1;
+    private Drawable mTireTreadTexture;
 
     public CarTopDownView(Context context)
     {
         super(context);
+        mContext = context;
 
         mImageTopDownCar = ContextCompat.getDrawable(context, R.drawable.truck_topdown);
         mImageTopDownCarAspectRatio = (float)mImageTopDownCar.getIntrinsicWidth()/(float)mImageTopDownCar.getIntrinsicHeight();
+        mTireTreadTextureId = 1;
+        mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_01);
+        simulateWheelSpin.run();
+
     }
 
 
@@ -46,20 +54,31 @@ public class CarTopDownView extends View
         Rect imageBounds = new Rect(picTopLeftX, picTopLeftY, picBottomRightX, picBottomRightY);
         mImageTopDownCar.setBounds(imageBounds);
 
+
         // set up wheels for car
+        Rect tireTextureBoundaries = new Rect();
         Paint wheelPaint = new Paint();
         wheelPaint.setColor(Color.DKGRAY);
         RectF wheelRearLeft = new RectF((float)(picTopLeftX), (float)(picBottomRightY-picHeight*0.3), (float)(picTopLeftX+picWidth/8), (float)(picBottomRightY-picHeight*0.1));
         canvas.drawRect(wheelRearLeft, wheelPaint);
+        wheelRearLeft.round(tireTextureBoundaries);
+        mTireTreadTexture.setBounds(tireTextureBoundaries);
+        mTireTreadTexture.draw(canvas);
+
         RectF wheelRearRight = new RectF((float)(picBottomRightX-picWidth/8), (float)(picBottomRightY-picHeight*0.3), (float)(picBottomRightX), (float)(picBottomRightY-picHeight*0.1));
         canvas.drawRect(wheelRearRight, wheelPaint);
-
+        wheelRearRight.round(tireTextureBoundaries);
+        mTireTreadTexture.setBounds(tireTextureBoundaries);
+        mTireTreadTexture.draw(canvas);
 
         RectF wheelFrontLeft = new RectF((float)(picTopLeftX+picWidth/20), (float)(picTopLeftY+picHeight*0.1), (float)(picTopLeftX+picWidth/6), (float)(picTopLeftY+picHeight*0.28));
         // Draw turing angle of the wheel (rotate canvas around wheel center to draw angled rectangle)
         canvas.save();
         canvas.rotate(mCarData.wheelAngle, wheelFrontLeft.centerX(), wheelFrontLeft.centerY());
         canvas.drawRect(wheelFrontLeft, wheelPaint);
+        wheelFrontLeft.round(tireTextureBoundaries);
+        mTireTreadTexture.setBounds(tireTextureBoundaries);
+        mTireTreadTexture.draw(canvas);
         canvas.restore();
 
         RectF wheelFrontRight = new RectF((float)(picBottomRightX-picWidth/6), (float)(picTopLeftY+picHeight*0.1), (float)(picBottomRightX-picWidth/20), (float)(picTopLeftY+picHeight*0.28));
@@ -67,6 +86,9 @@ public class CarTopDownView extends View
         canvas.save();
         canvas.rotate(mCarData.wheelAngle, wheelFrontRight.centerX(), wheelFrontRight.centerY());
         canvas.drawRect(wheelFrontRight, wheelPaint);
+        wheelFrontRight.round(tireTextureBoundaries);
+        mTireTreadTexture.setBounds(tireTextureBoundaries);
+        mTireTreadTexture.draw(canvas);
         canvas.restore();
 
         //Draw the car
@@ -177,7 +199,7 @@ public class CarTopDownView extends View
         labelPaint.setColor(Color.BLACK);
         labelPaint.setTextSize(canvas.getWidth()/25);
         labelPaint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText( mCarData.velocity + " km/h", canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/4, labelPaint);
+        canvas.drawText( String.format("%.2f", (mCarData.velocity * 3.6) ) + " km/h", canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/4, labelPaint);
 
         // draw turning angle labelling
         path = new Path();
@@ -189,6 +211,42 @@ public class CarTopDownView extends View
 
 
     }
+
+    // Runnable that sets a new wheel texture to simulate spinning wheels and triggers a redraw of the window (invalidate)
+    // reschedules itself to be called again after a certain amount of millis depending on the car's speed
+    Handler handler = new Handler(Looper.getMainLooper());
+    Runnable simulateWheelSpin = new Runnable(){
+        public void run(){
+
+            // Select new wheel tread texture to simulate spinning tire
+            // switching to the next texture in sequence every 1/30s accounts for roughly 0.023m/s (with a wheel circumference of ca 0.2m)
+            //int cycleNoTextures = (int) Math.ceil(mCarData.velocity / 0.023);
+            int cycleNoTextures = (int) Math.ceil( mCarData.velocity / (2/3.6) );   // increase perceived tire spin rate with each 2km/h (1m/s / 3.6)
+            if(cycleNoTextures > 6) cycleNoTextures = 6;                            // up to number of textures/2 (for greater values wheels would appear
+                                                                                    // to slow down again due to looping through the same textures (wagon wheel effect) )
+
+            mTireTreadTextureId = (mTireTreadTextureId + cycleNoTextures) % 11; // switch between the 11 different textures
+
+            switch(mTireTreadTextureId)
+            {
+                case 0: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_01); break;
+                case 1: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_02); break;
+                case 2: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_03); break;
+                case 3: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_04); break;
+                case 4: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_05); break;
+                case 5: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_06); break;
+                case 6: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_07); break;
+                case 7: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_08); break;
+                case 8: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_09); break;
+                case 9: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_10); break;
+                case 10: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_11); break;
+                default: mTireTreadTexture = ContextCompat.getDrawable(mContext, R.drawable.tire_tread_01);
+            }
+
+            invalidate(); //will trigger the onDraw
+            handler.postDelayed(this,33); // re-schedules this simulateWheelSpin() method for re-execution in 1/30s (30FPS)
+        }
+    };
 
     public void updateDisplayedData(CaroloCarSensorData carData)
     {

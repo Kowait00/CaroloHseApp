@@ -203,15 +203,15 @@ public class MainActivity extends AppCompatActivity
             while(stop != true)
             {
                 // Change dummy data and send new values as local broadcast every second
-                dummyData.heading = (dummyData.heading + 30) % 360;
-                dummyData.wheelAngle = (dummyData.wheelAngle + 45 + 10) % 90 - 45;
-                dummyData.distFrontLeft = (dummyData.distFrontLeft + 15) % 120;
-                dummyData.distFrontRight = (dummyData.distFrontRight + 15) % 120;
-                dummyData.distRearLeft = (dummyData.distRearLeft + 15) % 120;
-                dummyData.distRearRight = (dummyData.distRearRight + 15) % 120;
-                dummyData.distLeft = (dummyData.distLeft + 15) % 120;
-                dummyData.distRight = (dummyData.distRight + 15) % 120;
-                dummyData.velocity = (dummyData.velocity + 5) % 50;
+                dummyData.heading = (dummyData.heading + 2) % 360;
+                dummyData.wheelAngle = (dummyData.wheelAngle + 45 + 1) % 90 - 45;
+                dummyData.distFrontLeft = (dummyData.distFrontLeft + 5) % 120;
+                dummyData.distFrontRight = (dummyData.distFrontRight + 5) % 120;
+                dummyData.distRearLeft = (dummyData.distRearLeft + 5) % 120;
+                dummyData.distRearRight = (dummyData.distRearRight + 5) % 120;
+                dummyData.distLeft = (dummyData.distLeft + 5) % 120;
+                dummyData.distRight = (dummyData.distRight + 5) % 120;
+                dummyData.velocity = (dummyData.velocity + (float)0.01) % 9;
                 dummyData.acceleration = (dummyData.acceleration + 2) % 20;
 
                 Intent intent = new Intent(UdpReceiverService.UDPRECV_RESULT);
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 Log.d("MainActivity", "Generated dummy data");
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
