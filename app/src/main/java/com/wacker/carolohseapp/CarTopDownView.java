@@ -74,7 +74,7 @@ public class CarTopDownView extends View
         RectF wheelFrontLeft = new RectF((float)(picTopLeftX+picWidth/20), (float)(picTopLeftY+picHeight*0.1), (float)(picTopLeftX+picWidth/6), (float)(picTopLeftY+picHeight*0.28));
         // Draw turing angle of the wheel (rotate canvas around wheel center to draw angled rectangle)
         canvas.save();
-        canvas.rotate(mCarData.wheelAngle, wheelFrontLeft.centerX(), wheelFrontLeft.centerY());
+        canvas.rotate((float)mCarData.rotationYaw_K, wheelFrontLeft.centerX(), wheelFrontLeft.centerY());
         canvas.drawRect(wheelFrontLeft, wheelPaint);
         wheelFrontLeft.round(tireTextureBoundaries);
         mTireTreadTexture.setBounds(tireTextureBoundaries);
@@ -84,7 +84,7 @@ public class CarTopDownView extends View
         RectF wheelFrontRight = new RectF((float)(picBottomRightX-picWidth/6), (float)(picTopLeftY+picHeight*0.1), (float)(picBottomRightX-picWidth/20), (float)(picTopLeftY+picHeight*0.28));
         // Draw turing angle of the wheel (rotate canvas around wheel center to draw angled rectangle)
         canvas.save();
-        canvas.rotate(mCarData.wheelAngle, wheelFrontRight.centerX(), wheelFrontRight.centerY());
+        canvas.rotate((float)mCarData.rotationYaw_K, wheelFrontRight.centerX(), wheelFrontRight.centerY());
         canvas.drawRect(wheelFrontRight, wheelPaint);
         wheelFrontRight.round(tireTextureBoundaries);
         mTireTreadTexture.setBounds(tireTextureBoundaries);
@@ -94,12 +94,14 @@ public class CarTopDownView extends View
         //Draw the car
         mImageTopDownCar.draw(canvas);
 
+
+        // Distance sensors front
         // set up the corners of an ellipse for displaying distance sensor information
         // in a way that it scales with the size of the vehicle graphic
         float ovalRectTopLeftX = picTopLeftX;
         float ovalRectTopLeftY = picTopLeftY-picWidth/8;
         float ovalRectBottomRightX = picTopLeftX+picWidth;
-        float ovalRectBottomRightY = picTopLeftY+picWidth-picWidth/2;
+        float ovalRectBottomRightY = picTopLeftY+picWidth/2;
 
         RectF ovalRect = new RectF(ovalRectTopLeftX, ovalRectTopLeftY, ovalRectBottomRightX, ovalRectBottomRightY);
 
@@ -111,40 +113,69 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the front distance sensors
-        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 30) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 1) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 210, 58, false, paint );
-
-        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 30) paint.setColor(Color.RED);
-        else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 330, -58, false, paint );
+        canvas.drawArc(ovalRect, 220, 100, false, paint );
 
         // Draw the second layer of arcs for the front distance sensors
         // therefore increase oval size by scaleFactor
         float ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 60) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 2) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 210, 58, false, paint );
-
-
-        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 60) paint.setColor(Color.RED);
-        else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 330, -58, false, paint );
+        canvas.drawArc(ovalRect, 220, 100, false, paint );
 
         // Draw the third layer of arcs for the front distance sensors
         // therefore increase oval size by scaleFactor
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.distFrontLeft > 0 && mCarData.distFrontLeft < 90) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 3) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 210, 58, false, paint );
+        canvas.drawArc(ovalRect, 220, 100, false, paint );
 
-        if(mCarData.distFrontRight > 0 && mCarData.distFrontRight < 90) paint.setColor(Color.RED);
+
+        // Distance sensors rear
+        // set up the corners of an ellipse for displaying distance sensor information
+        // in a way that it scales with the size of the vehicle graphic
+        ovalRectTopLeftX = picTopLeftX;
+        ovalRectTopLeftY = picBottomRightY-picWidth/2;
+        ovalRectBottomRightX = picBottomRightX;
+        ovalRectBottomRightY = picBottomRightY+picWidth/8;
+
+        ovalRect = new RectF(ovalRectTopLeftX, ovalRectTopLeftY, ovalRectBottomRightX, ovalRectBottomRightY);
+
+        // set up a paint to make drawArc only paint the outer arc of the oval
+        paint = new Paint();
+        paint.setStrokeWidth(picWidth/10);
+        paint.setAntiAlias(true);
+        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setStyle(Paint.Style.STROKE);
+
+        // Draw the inner most arcs for the front distance sensors
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 1) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 330, -58, false, paint );
+        canvas.drawArc(ovalRect, 50, 80, false, paint );
+
+        // Draw the second layer of arcs for the front distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 2) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 50, 80, false, paint );
+
+        // Draw the third layer of arcs for the front distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 3) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 50, 80, false, paint );
+
 
         // Draw compass
         float compassCenterX = picTopLeftX+picWidth/2;
@@ -159,10 +190,11 @@ public class CarTopDownView extends View
         compassPaint.setTextSize(compassRadius/3);
         compassPaint.setTextAlign(Paint.Align.CENTER);
         compassPaint.setColor(Color.WHITE);
-        canvas.drawText("N", compassCenterX, compassCenterY-(float)(compassRadius*0.7), compassPaint);
+        canvas.drawText("start", compassCenterX, compassCenterY-(float)(compassRadius*0.7), compassPaint);
+        canvas.drawText("dir", compassCenterX, compassCenterY-(float)(compassRadius*0.4), compassPaint);
         // Draw pointer triangles of the compass, with correct rotation
         canvas.save();
-        canvas.rotate(mCarData.heading, compassCenterX, compassCenterY);
+        canvas.rotate((float)mCarData.posePsi, compassCenterX, compassCenterY);
         compassPaint = new Paint();
         compassPaint.setColor(Color.WHITE);
         Path path = new Path();
@@ -199,7 +231,7 @@ public class CarTopDownView extends View
         labelPaint.setColor(Color.BLACK);
         labelPaint.setTextSize(canvas.getWidth()/25);
         labelPaint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText( String.format("%.2f", (mCarData.velocity * 3.6) ) + " km/h", canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/4, labelPaint);
+        canvas.drawText( String.format("%.2f", (mCarData.movementV * 3.6) ) + " km/h", canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/4, labelPaint);
 
         // draw turning angle labelling
         path = new Path();
@@ -207,7 +239,7 @@ public class CarTopDownView extends View
         path.lineTo(wheelFrontRight.centerX()+canvas.getWidth()/6, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         canvas.drawPath(path, linePaint);
-        canvas.drawText( mCarData.wheelAngle + "°", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
+        canvas.drawText( mCarData.rotationYaw_K + "°", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
 
 
     }
@@ -220,8 +252,8 @@ public class CarTopDownView extends View
 
             // Select new wheel tread texture to simulate spinning tire
             // switching to the next texture in sequence every 1/30s accounts for roughly 0.023m/s (with a wheel circumference of ca 0.2m)
-            //int cycleNoTextures = (int) Math.ceil(mCarData.velocity / 0.023);
-            int cycleNoTextures = (int) Math.ceil( mCarData.velocity / (2/3.6) );   // increase perceived tire spin rate with each 2km/h (1m/s / 3.6)
+            //int cycleNoTextures = (int) Math.ceil(mCarData.movementV / 0.023);
+            int cycleNoTextures = (int) Math.ceil( mCarData.movementV / (2/3.6) );   // increase perceived tire spin rate with each 2km/h (1m/s / 3.6)
             if(cycleNoTextures > 6) cycleNoTextures = 6;                            // up to number of textures/2 (for greater values wheels would appear
                                                                                     // to slow down again due to looping through the same textures (wagon wheel effect) )
 

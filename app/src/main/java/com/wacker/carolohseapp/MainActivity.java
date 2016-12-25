@@ -198,16 +198,16 @@ public class MainActivity extends AppCompatActivity
             while(stop != true)
             {
                 // Change dummy data and send new values as local broadcast every second
-                dummyData.heading = (dummyData.heading + 2) % 360;
-                dummyData.wheelAngle = (dummyData.wheelAngle + 45 + 1) % 90 - 45;
-                dummyData.distFrontLeft = (dummyData.distFrontLeft + 5) % 120;
-                dummyData.distFrontRight = (dummyData.distFrontRight + 5) % 120;
-                dummyData.distRearLeft = (dummyData.distRearLeft + 5) % 120;
-                dummyData.distRearRight = (dummyData.distRearRight + 5) % 120;
-                dummyData.distLeft = (dummyData.distLeft + 5) % 120;
-                dummyData.distRight = (dummyData.distRight + 5) % 120;
-                dummyData.velocity = (dummyData.velocity + (float)0.01) % 9;
-                dummyData.acceleration = (dummyData.acceleration + 2) % 20;
+                dummyData.posePsi = (dummyData.posePsi + 2) % 360;
+                dummyData.rotationYaw_K = (dummyData.rotationYaw_K+ 45 + 1) % 90 - 45;
+                dummyData.environmentUS_Front = (dummyData.environmentUS_Front + 0.1) % 6;
+                dummyData.environmentUS_Rear = (dummyData.environmentUS_Rear + 0.1) % 6;
+                dummyData.environmentIR_Side_Front = (dummyData.environmentIR_Side_Front + 0.1) % 10;
+                dummyData.environmentIR_Side_Rear = (dummyData.environmentIR_Side_Rear + 0.1) % 10;
+                dummyData.poseX = (dummyData.poseX + 1) % 100;
+                dummyData.poseY= (dummyData.poseY + 1) % 100;
+                dummyData.movementV = (dummyData.movementV + (float)0.01) % 9;
+                dummyData.movementA = (dummyData.movementA + 2) % 20;
 
                 Intent intent = new Intent(UdpReceiverService.UDPRECV_RESULT);
                 intent.putExtra(UdpReceiverService.UDPRECV_MESSAGE, dummyData);

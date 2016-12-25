@@ -61,7 +61,7 @@ public class Tab2RawData extends Fragment
     private void updateUI(CaroloCarSensorData carData)
     {
         TextView textView = (TextView) getView().findViewById(R.id.rawdata_velocity_value);
-        textView.setText(String.valueOf(carData.velocity));
+        textView.setText(String.valueOf(carData.movementV));
     }
 
 }

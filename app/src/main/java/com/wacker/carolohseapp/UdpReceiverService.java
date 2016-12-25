@@ -95,7 +95,7 @@ public class UdpReceiverService extends Service
             Log.d("UdpRecv", "Starting to receive in background");
             byte[] bytes = "error".getBytes();
             int multicastPort = ports[0];
-            byte[] messageBuffer = new byte[1024];
+            byte[] messageBuffer = new byte[1600];
             InetAddress multicastAddress = null;
             MulticastSocket multicastSocket = null;
 
