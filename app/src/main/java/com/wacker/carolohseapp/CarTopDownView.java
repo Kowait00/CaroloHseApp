@@ -1,6 +1,7 @@
 package com.wacker.carolohseapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -43,12 +44,19 @@ public class CarTopDownView extends View
     @Override
     public void onDraw(Canvas canvas)
     {
+        // Take height of the android navigation bar into account, when present
+        int canvasHeight = 0;
+        Resources resources = mContext.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) canvasHeight = canvas.getHeight() - resources.getDimensionPixelSize(resourceId);
+        else canvasHeight = canvas.getHeight();
+
         // set up top down car graphic relative to the screen width while maintaining the aspect ratio
         // to keep aspect ratio of graphic: newHeight = newWidth/aspectRatio
         int picWidth = (int)((float)(canvas.getWidth())*(0.4));
         int picHeight = (int)(picWidth/mImageTopDownCarAspectRatio);
         int picTopLeftX = canvas.getWidth()/9;                 // horizontal padding of 1/9 canvas width
-        int picTopLeftY = (canvas.getHeight()-picHeight)/2;    // vertically centered
+        int picTopLeftY = (canvasHeight-picHeight)/2;    // vertically centered
         int picBottomRightX = picTopLeftX + picWidth;
         int picBottomRightY = picTopLeftY + picHeight;
         Rect imageBounds = new Rect(picTopLeftX, picTopLeftY, picBottomRightX, picBottomRightY);
@@ -99,7 +107,7 @@ public class CarTopDownView extends View
         // set up the corners of an ellipse for displaying distance sensor information
         // in a way that it scales with the size of the vehicle graphic
         float ovalRectTopLeftX = picTopLeftX;
-        float ovalRectTopLeftY = picTopLeftY-picWidth/8;
+        float ovalRectTopLeftY = picTopLeftY-picWidth/6;
         float ovalRectBottomRightX = picTopLeftX+picWidth;
         float ovalRectBottomRightY = picTopLeftY+picWidth/2;
 
@@ -142,7 +150,7 @@ public class CarTopDownView extends View
         ovalRectTopLeftX = picTopLeftX;
         ovalRectTopLeftY = picBottomRightY-picWidth/2;
         ovalRectBottomRightX = picBottomRightX;
-        ovalRectBottomRightY = picBottomRightY+picWidth/8;
+        ovalRectBottomRightY = picBottomRightY+picWidth/6;
 
         ovalRect = new RectF(ovalRectTopLeftX, ovalRectTopLeftY, ovalRectBottomRightX, ovalRectBottomRightY);
 
@@ -153,28 +161,28 @@ public class CarTopDownView extends View
         paint.setStrokeCap(Paint.Cap.BUTT);
         paint.setStyle(Paint.Style.STROKE);
 
-        // Draw the inner most arcs for the front distance sensors
+        // Draw the inner most arcs for the rear distance sensors
         if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 1) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 50, 80, false, paint );
+        canvas.drawArc(ovalRect, 45, 90, false, paint );
 
-        // Draw the second layer of arcs for the front distance sensors
+        // Draw the second layer of arcs for the rear distance sensors
         // therefore increase oval size by scaleFactor
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
         if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 2) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 50, 80, false, paint );
+        canvas.drawArc(ovalRect, 45, 90, false, paint );
 
-        // Draw the third layer of arcs for the front distance sensors
+        // Draw the third layer of arcs for the rear distance sensors
         // therefore increase oval size by scaleFactor
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
         if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 3) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
-        canvas.drawArc(ovalRect, 50, 80, false, paint );
+        canvas.drawArc(ovalRect, 45, 90, false, paint );
 
 
         // Draw compass
@@ -239,7 +247,7 @@ public class CarTopDownView extends View
         path.lineTo(wheelFrontRight.centerX()+canvas.getWidth()/6, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         canvas.drawPath(path, linePaint);
-        canvas.drawText( mCarData.rotationYaw_K + "°", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
+        canvas.drawText( mCarData.rotationYaw_K + " °/s", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
 
 
     }

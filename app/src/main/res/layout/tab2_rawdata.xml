@@ -1,42 +1,471 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context="com.wacker.carolohseapp.MainActivity$PlaceholderFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    tools:context="com.wacker.carolohseapp.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Daten"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/odometry_heading"
+            android:id="@+id/rawdata_heading_odomety"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Velocity"
-        android:id="@+id/rawdata_velocity_label"
-        android:layout_below="@+id/section_label"
-        android:layout_toRightOf="@+id/section_label"
-        android:layout_toEndOf="@+id/section_label"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rawdata_movementV_label"
+            android:layout_below="@+id/rawdata_heading_odomety"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/rawdata_movementV_label"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:id="@+id/rawdata_velocity_value"
-        android:layout_alignTop="@+id/rawdata_velocity_label"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_movementV_value"
+            android:layout_marginLeft="55dp"
+            android:layout_marginStart="55dp"
+            android:layout_alignTop="@+id/rawdata_movementV_label"
+            android:layout_toRightOf="@+id/rawdata_posePsi_label"
+            android:layout_toEndOf="@+id/rawdata_posePsi_label"/>
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_movementV_unit"
+            android:layout_marginLeft="3dp"
+            android:layout_alignTop="@+id/rawdata_movementV_value"
+            android:layout_toRightOf="@+id/rawdata_movementV_value"
+            android:layout_toEndOf="@+id/rawdata_movementV_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_movementA_label"
+            android:id="@+id/rawdata_movementA_label"
+            android:layout_below="@+id/rawdata_movementV_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_movementA_value"
+            android:layout_alignTop="@+id/rawdata_movementA_label"
+            android:layout_toLeftOf="@+id/rawdata_movementV_unit"
+            android:layout_toStartOf="@+id/rawdata_movementV_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m/s"
+            android:id="@+id/rawdata_movementA_unit"
+            android:layout_marginLeft="3dp"
+            android:layout_alignTop="@+id/rawdata_movementA_value"
+            android:layout_toRightOf="@+id/rawdata_movementA_value"
+            android:layout_toEndOf="@+id/rawdata_movementA_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_movementS_label"
+            android:id="@+id/rawdata_movementS_label"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/rawdata_movementA_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_movementS_value"
+            android:layout_alignTop="@+id/rawdata_movementS_label"
+            android:layout_toLeftOf="@+id/rawdata_movementA_unit"
+            android:layout_toStartOf="@+id/rawdata_movementA_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_movementS_unit"
+            android:layout_marginLeft="3dp"
+            android:layout_alignTop="@+id/rawdata_movementS_value"
+            android:layout_toRightOf="@+id/rawdata_movementA_value"
+            android:layout_toEndOf="@+id/rawdata_movementA_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_poseX_label"
+            android:id="@+id/rawdata_poseX_label"
+            android:layout_below="@+id/rawdata_movementS_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_poseX_value"
+            android:layout_alignTop="@+id/rawdata_poseX_label"
+            android:layout_toLeftOf="@+id/rawdata_movementS_unit"
+            android:layout_toStartOf="@+id/rawdata_movementS_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_poseX_unit"
+            android:layout_alignTop="@+id/rawdata_poseX_value"
+            android:layout_alignLeft="@+id/rawdata_movementS_unit"
+            android:layout_alignStart="@+id/rawdata_movementS_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_poseY_label"
+            android:id="@+id/rawdata_poseY_label"
+            android:layout_below="@+id/rawdata_poseX_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_poseY_value"
+            android:layout_alignTop="@+id/rawdata_poseY_label"
+            android:layout_alignRight="@+id/rawdata_poseX_value"
+            android:layout_alignEnd="@+id/rawdata_poseX_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_poseY_unit"
+            android:layout_alignTop="@+id/rawdata_poseY_value"
+            android:layout_alignLeft="@+id/rawdata_poseX_unit"
+            android:layout_alignStart="@+id/rawdata_poseX_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_posePsi_label"
+            android:id="@+id/rawdata_posePsi_label"
+            android:layout_below="@+id/rawdata_poseY_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_posePsi_value"
+            android:layout_alignTop="@+id/rawdata_posePsi_label"
+            android:layout_alignRight="@+id/rawdata_poseY_value"
+            android:layout_alignEnd="@+id/rawdata_poseY_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°"
+            android:id="@+id/rawdata_posePsi_unit"
+            android:layout_alignTop="@+id/rawdata_posePsi_value"
+            android:layout_alignLeft="@+id/rawdata_poseY_unit"
+            android:layout_alignStart="@+id/rawdata_poseY_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_rotationPsi_K_label"
+            android:id="@+id/rawdata_rotationPsi_K_Label"
+            android:layout_below="@+id/rawdata_posePsi_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_rotationPsi_K_value"
+            android:layout_alignTop="@+id/rawdata_rotationPsi_K_Label"
+            android:layout_toLeftOf="@+id/rawdata_movementS_unit"
+            android:layout_toStartOf="@+id/rawdata_movementS_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°"
+            android:id="@+id/rawdata_rotationPsi_K_unit"
+            android:layout_alignTop="@+id/rawdata_rotationPsi_K_value"
+            android:layout_alignLeft="@+id/rawdata_posePsi_unit"
+            android:layout_alignStart="@+id/rawdata_posePsi_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_rotationPsi_Ko_label"
+            android:id="@+id/rawdata_rotationPsi_Ko_label"
+            android:layout_below="@+id/rawdata_rotationPsi_K_Label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_rotationPsi_Ko_value"
+            android:layout_alignTop="@+id/rawdata_rotationPsi_Ko_label"
+            android:layout_alignRight="@+id/rawdata_posePsi_value"
+            android:layout_alignEnd="@+id/rawdata_posePsi_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°"
+            android:id="@+id/rawdata_rotationPsi_Ko_unit"
+            android:layout_alignTop="@+id/rawdata_rotationPsi_Ko_value"
+            android:layout_alignLeft="@+id/rawdata_rotationPsi_K_unit"
+            android:layout_alignStart="@+id/rawdata_rotationPsi_K_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_rotationYaw_K_label"
+            android:id="@+id/rawdata_rotationYaw_K_label"
+            android:layout_below="@+id/rawdata_rotationPsi_Ko_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_rotationYaw_K_value"
+            android:layout_alignTop="@+id/rawdata_rotationYaw_K_label"
+            android:layout_alignRight="@+id/rawdata_posePsi_value"
+            android:layout_alignEnd="@+id/rawdata_posePsi_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°/s"
+            android:id="@+id/rawdata_rotationYaw_K_unit"
+            android:layout_alignTop="@+id/rawdata_rotationYaw_K_value"
+            android:layout_alignLeft="@+id/rawdata_rotationPsi_Ko_unit"
+            android:layout_alignStart="@+id/rawdata_rotationPsi_Ko_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_rotationYaw_Ko_label"
+            android:id="@+id/rawdata_rotationYaw_Ko_label"
+            android:layout_below="@+id/rawdata_rotationYaw_K_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignTop="@+id/rawdata_rotationYaw_Ko_label"
+            android:layout_alignRight="@+id/rawdata_posePsi_value"
+            android:layout_alignEnd="@+id/rawdata_posePsi_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="°/s"
+            android:id="@+id/rawdata_rotationYaw_Ko_unit"
+            android:layout_alignTop="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignLeft="@+id/rawdata_rotationYaw_K_unit"
+            android:layout_alignStart="@+id/rawdata_rotationYaw_K_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/rawdata_heading_environment"
+            android:id="@+id/rawdata_heading_environment"
+            android:layout_below="@+id/rawdata_rotationYaw_Ko_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_environmentUS_Front_label"
+            android:id="@+id/rawdata_environmentUS_Front_label"
+            android:layout_below="@+id/rawdata_heading_environment"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_environmentUS_Front_value"
+            android:layout_alignTop="@+id/rawdata_environmentUS_Front_label"
+            android:layout_alignRight="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignEnd="@+id/rawdata_rotationYaw_Ko_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_environmentUS_Front_unit"
+            android:layout_alignTop="@+id/rawdata_environmentUS_Front_value"
+            android:layout_alignLeft="@+id/rawdata_rotationYaw_Ko_unit"
+            android:layout_alignStart="@+id/rawdata_rotationYaw_Ko_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_environmentUS_Rear_label"
+            android:id="@+id/rawdata_environmentUS_Rear_label"
+            android:layout_below="@+id/rawdata_environmentUS_Front_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_environmentUS_Rear_value"
+            android:layout_alignTop="@+id/rawdata_environmentUS_Rear_label"
+            android:layout_alignRight="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignEnd="@+id/rawdata_rotationYaw_Ko_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_environmentUS_Rear_unit"
+            android:layout_alignTop="@+id/rawdata_environmentUS_Rear_value"
+            android:layout_alignLeft="@+id/rawdata_environmentUS_Front_unit"
+            android:layout_alignStart="@+id/rawdata_environmentUS_Front_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_environmentIR_Side_Front_label"
+            android:id="@+id/rawdata_environmentIR_Side_Front_label"
+            android:layout_below="@+id/rawdata_environmentUS_Rear_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_environmentIR_Side_Front_value"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Side_Front_label"
+            android:layout_alignRight="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignEnd="@+id/rawdata_rotationYaw_Ko_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_environmentIR_Side_Front_unit"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Side_Front_value"
+            android:layout_alignLeft="@+id/rawdata_environmentUS_Rear_unit"
+            android:layout_alignStart="@+id/rawdata_environmentUS_Rear_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_environmentIR_Side_Rear_label"
+            android:id="@+id/rawdata_environmentIR_Side_Rear_label"
+            android:layout_below="@+id/rawdata_environmentIR_Side_Front_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_environmentIR_Side_Rear_value"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Side_Rear_label"
+            android:layout_alignRight="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignEnd="@+id/rawdata_rotationYaw_Ko_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_environmentIR_Side_Rear_unit"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Side_Rear_value"
+            android:layout_alignLeft="@+id/rawdata_environmentIR_Side_Front_unit"
+            android:layout_alignStart="@+id/rawdata_environmentIR_Side_Front_unit"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rawdata_environmentIR_Front_Left_label"
+            android:id="@+id/rawdata_environmentIR_Front_Left_label"
+            android:layout_below="@+id/rawdata_environmentIR_Side_Rear_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/rawdata_environmentIR_Front_Left_value"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Front_Left_label"
+            android:layout_alignRight="@+id/rawdata_rotationYaw_Ko_value"
+            android:layout_alignEnd="@+id/rawdata_rotationYaw_Ko_value"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="m"
+            android:id="@+id/rawdata_environmentIR_Front_Left_unit"
+            android:layout_alignTop="@+id/rawdata_environmentIR_Front_Left_value"
+            android:layout_alignLeft="@+id/rawdata_environmentIR_Side_Rear_unit"
+            android:layout_alignStart="@+id/rawdata_environmentIR_Side_Rear_unit"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>

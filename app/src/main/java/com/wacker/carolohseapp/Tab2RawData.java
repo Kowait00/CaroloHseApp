@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 /**
  * Created by wacke on 27.11.2016.
  */
@@ -60,8 +62,37 @@ public class Tab2RawData extends Fragment
 
     private void updateUI(CaroloCarSensorData carData)
     {
-        TextView textView = (TextView) getView().findViewById(R.id.rawdata_velocity_value);
-        textView.setText(String.valueOf(carData.movementV));
+        TextView textview = (TextView) getView().findViewById(R.id.rawdata_movementV_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.movementV));
+        textview = (TextView) getView().findViewById(R.id.rawdata_movementA_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.movementA));
+        textview = (TextView) getView().findViewById(R.id.rawdata_movementS_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.movementS));
+        textview = (TextView) getView().findViewById(R.id.rawdata_poseX_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.poseX));
+        textview = (TextView) getView().findViewById(R.id.rawdata_poseY_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.poseY));
+        textview = (TextView) getView().findViewById(R.id.rawdata_posePsi_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.posePsi));
+        textview = (TextView) getView().findViewById(R.id.rawdata_rotationPsi_K_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.rotationPsi_K));
+        textview = (TextView) getView().findViewById(R.id.rawdata_rotationPsi_Ko_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.rotationPsi_Ko));
+        textview = (TextView) getView().findViewById(R.id.rawdata_rotationYaw_K_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.rotationYaw_K));
+        textview = (TextView) getView().findViewById(R.id.rawdata_rotationYaw_Ko_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.rotationYaw_Ko));
+        textview = (TextView) getView().findViewById(R.id.rawdata_environmentUS_Front_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.environmentUS_Front));
+        textview = (TextView) getView().findViewById(R.id.rawdata_environmentUS_Rear_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.environmentUS_Rear));
+        textview = (TextView) getView().findViewById(R.id.rawdata_environmentIR_Side_Front_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.environmentIR_Side_Front));
+        textview = (TextView) getView().findViewById(R.id.rawdata_environmentIR_Side_Rear_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.environmentIR_Side_Rear));
+        textview = (TextView) getView().findViewById(R.id.rawdata_environmentIR_Front_Left_value);
+        textview.setText(String.format(Locale.GERMAN, "%.2f", carData.environmentIR_Front_Left));
+
     }
 
 }

@@ -8,4 +8,26 @@
     <string name="dev_info_text">Entwickelt in 2016\nvon Konstantin Wacker\n\nals Studienarbeit\nan der Hochschule Esslingen</string>
     <string name="car_image_source_info_text">Grafik Pickup Truck:\n&#169;TRBRY\nopengameart.org/content/car-pickup</string>
     <string name="tire_tread_texture_source_info_text">Tire Tread Texture:\n&#169;seabranddesign\nVecteezy.com</string>
+
+    <!-- Strings of raw data tab-->
+    <string name="odometry_heading">Odometriedaten</string>
+    <string name="rawdata_heading_environment">Umgebungsdaten</string>
+    <string name="rawdata_movementV_label">Geschwindigkeit:</string>
+    <string name="rawdata_movementA_label">Beschleunigung:</string>
+    <string name="rawdata_movementS_label">Zurückgelegte Strecke:</string>
+    <string name="rawdata_poseX_label">X-Pos (rel. zu Startpunkt):</string>
+    <string name="rawdata_poseY_label">Y-Pos (rel. zu Startpunkt):</string>
+    <string name="rawdata_posePsi_label">Richtung (rel. zu Startrichtung):</string>
+    <string name="rawdata_rotationPsi_K_label">Rotation K:</string>
+    <string name="rawdata_rotationPsi_Ko_label">Rotation Ko:</string>
+    <string name="rawdata_rotationYaw_K_label">Yaw K:</string>
+    <string name="rawdata_rotationYaw_Ko_label">Yaw Ko:</string>
+    <string name="rawdata_environmentUS_Front_label">Ultraschall Front:</string>
+    <string name="rawdata_environmentUS_Rear_label">Ultraschall Heck:</string>
+    <string name="rawdata_environmentIR_Side_Front_label">Infrarot rechts vorn:</string>
+    <string name="rawdata_environmentIR_Side_Rear_label">Infrarot rechts hinten:</string>
+    <string name="rawdata_environmentIR_Front_Left_label">Infrarot Front links:</string>
+
+
+
 </resources>
