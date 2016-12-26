@@ -202,12 +202,12 @@ public class MainActivity extends AppCompatActivity
                 dummyData.rotationYaw_K = (dummyData.rotationYaw_K+ 45 + 1) % 90 - 45;
                 dummyData.environmentUS_Front = (dummyData.environmentUS_Front + 0.1) % 6;
                 dummyData.environmentUS_Rear = (dummyData.environmentUS_Rear + 0.1) % 6;
-                dummyData.environmentIR_Side_Front = (dummyData.environmentIR_Side_Front + 0.1) % 10;
-                dummyData.environmentIR_Side_Rear = (dummyData.environmentIR_Side_Rear + 0.1) % 10;
+                dummyData.environmentIR_Side_Front = (dummyData.environmentIR_Side_Front + 0.01) % 0.5;
+                dummyData.environmentIR_Side_Rear = (dummyData.environmentIR_Side_Rear + 0.01) % 0.5;
                 dummyData.poseX = (dummyData.poseX + 1) % 100;
-                dummyData.poseY= (dummyData.poseY + 1) % 100;
+                dummyData.poseY = (dummyData.poseY + 1) % 100;
                 dummyData.movementV = (dummyData.movementV + (float)0.01) % 9;
-                dummyData.movementA = (dummyData.movementA + 2) % 20;
+                dummyData.movementA = (dummyData.movementA + 0.05) % 5;
 
                 Intent intent = new Intent(UdpReceiverService.UDPRECV_RESULT);
                 intent.putExtra(UdpReceiverService.UDPRECV_MESSAGE, dummyData);

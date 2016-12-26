@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="m"
+            android:text="m/s"
             android:id="@+id/rawdata_movementV_unit"
             android:layout_marginLeft="3dp"
             android:layout_alignTop="@+id/rawdata_movementV_value"
@@ -80,7 +80,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="m/s"
+            android:text="@string/m_per_s_squared"
             android:id="@+id/rawdata_movementA_unit"
             android:layout_marginLeft="3dp"
             android:layout_alignTop="@+id/rawdata_movementA_value"
@@ -321,7 +321,7 @@
             android:layout_below="@+id/rawdata_rotationYaw_Ko_label"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:textStyle="bold"
             android:textSize="18dp"/>
 

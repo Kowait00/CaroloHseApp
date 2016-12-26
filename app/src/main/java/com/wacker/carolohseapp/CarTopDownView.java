@@ -102,6 +102,10 @@ public class CarTopDownView extends View
         //Draw the car
         mImageTopDownCar.draw(canvas);
 
+        Paint labelPaint = new Paint();
+        labelPaint.setColor(Color.BLACK);
+        labelPaint.setTextSize(canvas.getWidth()/25);
+        labelPaint.setTextAlign(Paint.Align.CENTER);
 
         // Distance sensors front
         // set up the corners of an ellipse for displaying distance sensor information
@@ -143,6 +147,9 @@ public class CarTopDownView extends View
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 220, 100, false, paint );
 
+        // Draw labelling with actual dist value
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.14;
+        canvas.drawText( String.format("%.2f", (mCarData.environmentUS_Front) ) + " m", ovalRectTopLeftX+(ovalRectBottomRightX-ovalRectTopLeftX)/2, ovalRectTopLeftY-ovalScaling, labelPaint);
 
         // Distance sensors rear
         // set up the corners of an ellipse for displaying distance sensor information
@@ -183,6 +190,108 @@ public class CarTopDownView extends View
         if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 3) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 45, 90, false, paint );
+
+        // Draw labelling with actual dist value
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.24;
+        canvas.drawText( String.format("%.2f", (mCarData.environmentUS_Rear) ) + " m", ovalRectTopLeftX+(ovalRectBottomRightX-ovalRectTopLeftX)/2, ovalRectBottomRightY+ovalScaling, labelPaint);
+
+
+        // Distance sensors side front
+        // set up the corners of an ellipse for displaying distance sensor information
+        // in a way that it scales with the size of the vehicle graphic
+        ovalRectTopLeftX = picBottomRightX-picWidth/2;
+        ovalRectTopLeftY = picTopLeftY-picWidth/10;
+        ovalRectBottomRightX = picBottomRightX-picWidth/20;
+        ovalRectBottomRightY = picTopLeftY+4*picWidth/10;
+
+        ovalRect = new RectF(ovalRectTopLeftX, ovalRectTopLeftY, ovalRectBottomRightX, ovalRectBottomRightY);
+
+        // set up a paint to make drawArc only paint the outer arc of the oval
+        paint = new Paint();
+        paint.setStrokeWidth(picWidth/15);
+        paint.setAntiAlias(true);
+        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setStyle(Paint.Style.STROKE);
+
+        // Draw the inner most arcs for the side front distance sensors
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.1) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 345, 10, false, paint );
+
+        // Draw the second layer of arcs for the side front distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.2) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 345, 10, false, paint );
+
+        // Draw the third layer of arcs for the side front distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.3) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 345, 10, false, paint );
+
+        // Draw labelling with actual dist value
+        labelPaint.setTextAlign(Paint.Align.LEFT);
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.52;
+        canvas.save();
+        canvas.rotate(-6, (ovalRectTopLeftX+ovalRectBottomRightX)/2, (ovalRectTopLeftY+ovalRectBottomRightY)/2);
+        canvas.drawText( String.format("%.2f", (mCarData.environmentIR_Side_Front) ) + " m", ovalRectBottomRightX+ovalScaling, ovalRectTopLeftY+(ovalRectBottomRightY-ovalRectTopLeftY)/2, labelPaint);
+        canvas.restore();
+
+
+        // Distance sensors side rear
+        // set up the corners of an ellipse for displaying distance sensor information
+        // in a way that it scales with the size of the vehicle graphic
+        ovalRectTopLeftX = picBottomRightX-picWidth/2;
+        ovalRectTopLeftY = picBottomRightY-4*picWidth/10;
+        ovalRectBottomRightX = picBottomRightX-picWidth/20;
+        ovalRectBottomRightY = picBottomRightY+picWidth/10;
+
+        ovalRect = new RectF(ovalRectTopLeftX, ovalRectTopLeftY, ovalRectBottomRightX, ovalRectBottomRightY);
+
+        // set up a paint to make drawArc only paint the outer arc of the oval
+        paint = new Paint();
+        paint.setStrokeWidth(picWidth/15);
+        paint.setAntiAlias(true);
+        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setStyle(Paint.Style.STROKE);
+
+        // Draw the inner most arcs for the side rear distance sensors
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.1) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 5, 10, false, paint );
+
+        // Draw the second layer of arcs for the side rear distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.2) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 5, 10, false, paint );
+
+        // Draw the third layer of arcs for the side rear distance sensors
+        // therefore increase oval size by scaleFactor
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
+        ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
+
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear< 0.3) paint.setColor(Color.RED);
+        else paint.setColor(Color.GREEN);
+        canvas.drawArc(ovalRect, 5, 10, false, paint );
+
+        // Draw labelling with actual dist value
+        labelPaint.setTextAlign(Paint.Align.LEFT);
+        ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.52;
+        canvas.save();
+        canvas.rotate(8, (ovalRectTopLeftX+ovalRectBottomRightX)/2, (ovalRectTopLeftY+ovalRectBottomRightY)/2);
+        canvas.drawText( String.format("%.2f", (mCarData.environmentIR_Side_Rear) ) + " m", ovalRectBottomRightX+ovalScaling, ovalRectTopLeftY+3*(ovalRectBottomRightY-ovalRectTopLeftY)/5, labelPaint);
+        canvas.restore();
 
 
         // Draw compass
@@ -235,7 +344,7 @@ public class CarTopDownView extends View
         path.lineTo(wheelRearRight.centerX()+canvas.getWidth()/6, wheelRearRight.centerY()-wheelRearRight.height()/2);
         path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelRearRight.centerY()-wheelRearRight.height()/2);
         canvas.drawPath(path, linePaint);
-        Paint labelPaint = new Paint();
+        labelPaint = new Paint();
         labelPaint.setColor(Color.BLACK);
         labelPaint.setTextSize(canvas.getWidth()/25);
         labelPaint.setTextAlign(Paint.Align.RIGHT);

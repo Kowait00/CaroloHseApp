@@ -52,7 +52,8 @@ public class UdpReceiverService extends Service
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         //return super.onStartCommand(intent, flags, startId);
-        Toast.makeText(UdpReceiverService.this, "UDP Receiver Service started", Toast.LENGTH_LONG).show();
+        Log.d("UdpRecv", "UDP Receiver Service started");
+        //Toast.makeText(UdpReceiverService.this, "UDP Receiver Service started", Toast.LENGTH_LONG).show();
 
         //AsyncTask zum Empfangen der UDP Multicast Packets starten
         if(!mCurrentlyReceiving)
@@ -73,7 +74,8 @@ public class UdpReceiverService extends Service
             mPackRec.cancelNow();
             mCurrentlyReceiving = false;
         }
-        Toast.makeText(UdpReceiverService.this, "UDP Receiver Service stopped", Toast.LENGTH_LONG).show();
+        Log.d("UdpRecv", "UDP Receiver Service stopped");
+        //Toast.makeText(UdpReceiverService.this, "UDP Receiver Service stopped", Toast.LENGTH_LONG).show();
     }
 
     @Nullable
@@ -163,7 +165,8 @@ public class UdpReceiverService extends Service
         protected void onPostExecute(String s)
         {
             super.onPostExecute(s);
-            Toast.makeText(UdpReceiverService.this, "Stopped Receiving", Toast.LENGTH_SHORT).show();
+            Log.d("UdpRecv", "Stopped Receiving");
+            //Toast.makeText(UdpReceiverService.this, "Stopped Receiving", Toast.LENGTH_SHORT).show();
         }
 
         /**
