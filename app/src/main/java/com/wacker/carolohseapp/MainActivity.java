@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity
                     Tab2RawData tab2 = new Tab2RawData();
                     return tab2;
                 case 2:
-                    Tab3CameraPlot tab3 = new Tab3CameraPlot();
+                    Tab3DrivenRoutePlot tab3 = new Tab3DrivenRoutePlot();
                     return tab3;
             }
             return null;
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                 case 1:
                     return "Daten";
                 case 2:
-                    return "Kamera";
+                    return "Gefahrene Strecke";
             }
             return null;
         }
@@ -195,6 +195,8 @@ public class MainActivity extends AppCompatActivity
             stop = false;
             CaroloCarSensorData dummyData = new CaroloCarSensorData();
 
+            int i = 0;
+
             while(stop != true)
             {
                 // Change dummy data and send new values as local broadcast every second
@@ -204,10 +206,11 @@ public class MainActivity extends AppCompatActivity
                 dummyData.environmentUS_Rear = (dummyData.environmentUS_Rear + 0.1) % 6;
                 dummyData.environmentIR_Side_Front = (dummyData.environmentIR_Side_Front + 0.01) % 0.5;
                 dummyData.environmentIR_Side_Rear = (dummyData.environmentIR_Side_Rear + 0.01) % 0.5;
-                dummyData.poseX = (dummyData.poseX + 1) % 100;
-                dummyData.poseY = (dummyData.poseY + 1) % 100;
-                dummyData.movementV = (dummyData.movementV + (float)0.01) % 9;
+                dummyData.poseX = .2*i * Math.cos(.02 * i * Math.PI);
+                dummyData.poseY = .2*i * Math.sin(.02 * i * Math.PI);
+                dummyData.movementV = (dummyData.movementV + (float)0.01) % 3;
                 dummyData.movementA = (dummyData.movementA + 0.05) % 5;
+                i++;
 
                 Intent intent = new Intent(UdpReceiverService.UDPRECV_RESULT);
                 intent.putExtra(UdpReceiverService.UDPRECV_MESSAGE, dummyData);

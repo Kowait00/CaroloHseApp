@@ -370,7 +370,7 @@ public class CarTopDownView extends View
             // Select new wheel tread texture to simulate spinning tire
             // switching to the next texture in sequence every 1/30s accounts for roughly 0.023m/s (with a wheel circumference of ca 0.2m)
             //int cycleNoTextures = (int) Math.ceil(mCarData.movementV / 0.023);
-            int cycleNoTextures = (int) Math.ceil( mCarData.movementV / (2/3.6) );   // increase perceived tire spin rate with each 2km/h (1m/s / 3.6)
+            int cycleNoTextures = (int) Math.ceil( mCarData.movementV / (1/3.6) );   // increase perceived tire spin rate with each 1km/h (1m/s / 3.6)
             if(cycleNoTextures > 6) cycleNoTextures = 6;                            // up to number of textures/2 (for greater values wheels would appear
                                                                                     // to slow down again due to looping through the same textures (wagon wheel effect) )
 
