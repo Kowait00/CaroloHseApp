@@ -41,29 +41,30 @@ public class CaroloCarSensorData implements Serializable
 
     public CaroloCarSensorData(byte[] byteMsg)
     {
-        if(byteMsg.length != 1024)
-        {
-            Log.e("CarSensorData", "Input data has unexpected byte count and can't be decoded");
-            return;
-        }
+        //if(byteMsg.length != 1024)
+        //{
+        //    Log.e("CarSensorData", "Input data has unexpected byte count and can't be decoded");
+        //    return;
+        //}
         //Retrieve the values from the byte stream
-        poseX = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 0, 64) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        poseY = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 64, 128 ) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        posePsi = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 128, 192) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
-        movementS = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 192, 256) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        movementV = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 256, 320) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        movementA = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 320, 384) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        rotationPsi_K = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 384, 448) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
-        rotationPsi_Ko = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 448, 512) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
-        rotationYaw_K = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 512, 576) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
-        rotationYaw_Ko = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 576, 640) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
-        environmentUS_Front = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 640, 704) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        environmentUS_Rear = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 704, 768) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        environmentIR_Side_Front = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 768, 832) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        environmentIR_Side_Rear = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 832 , 896) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        environmentIR_Front_Left = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 896, 960) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        valideSideDisLeft = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 960, 1024) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
-        valideSideDisRight = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 1024, 1088) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+
+        poseX = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 0, 8) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        poseY = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 8, 16 ) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        posePsi = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 16, 25) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        movementS = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 24, 32) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        movementV = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 32, 40) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        movementA = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 40, 48) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        rotationPsi_K = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 48, 56) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        rotationPsi_Ko = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 56, 64) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        rotationYaw_K = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 64, 72) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        rotationYaw_Ko = Math.toDegrees(ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 72, 80) ).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        environmentUS_Front = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 80, 88) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        environmentUS_Rear = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 88, 96) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        environmentIR_Side_Front = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 96, 104) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        environmentIR_Side_Rear = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 104 , 112) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        environmentIR_Front_Left = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 112, 120) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        valideSideDisLeft = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 120, 128) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        valideSideDisRight = ByteBuffer.wrap( Arrays.copyOfRange(byteMsg, 128, 136) ).order(ByteOrder.LITTLE_ENDIAN).getDouble();
 
     }
 

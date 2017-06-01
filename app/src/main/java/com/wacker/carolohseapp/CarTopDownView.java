@@ -356,7 +356,7 @@ public class CarTopDownView extends View
         path.lineTo(wheelFrontRight.centerX()+canvas.getWidth()/6, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         path.lineTo(canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/2);
         canvas.drawPath(path, linePaint);
-        canvas.drawText( mCarData.rotationYaw_K + " °/s", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
+        canvas.drawText( String.format("%.2f", mCarData.rotationYaw_K) + " °/s", canvas.getWidth()-canvas.getWidth()/20, wheelFrontRight.centerY()-wheelFrontRight.height()/4, labelPaint);
 
 
     }

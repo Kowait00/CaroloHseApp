@@ -60,14 +60,6 @@ public class MainActivity extends AppCompatActivity
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
-
-        //Start UDP receiver service
-        //Intent intent = new Intent(this, UdpReceiverService.class);
-        //startService(intent);
-
-
     }
 
     @Override
@@ -77,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         //Start UDP receiver service
         Intent intent = new Intent(this, UdpReceiverService.class);
         startService(intent);
-
     }
 
     @Override
