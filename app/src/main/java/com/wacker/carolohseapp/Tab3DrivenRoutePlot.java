@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Dimension;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -16,10 +15,8 @@ import android.view.ViewGroup;
 
 import com.androidplot.ui.HorizontalPositioning;
 import com.androidplot.ui.Size;
-import com.androidplot.ui.SizeMetric;
 import com.androidplot.ui.SizeMode;
 import com.androidplot.ui.VerticalPositioning;
-import com.androidplot.util.DisplayDimensions;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
@@ -27,7 +24,6 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,7 +35,7 @@ public class Tab3DrivenRoutePlot extends Fragment
     private List<Double> xPosVals = new ArrayList<Double>();
     private List<Double> yPosVals = new ArrayList<Double>();
     private XYSeries posSeries;
-    long lastDataRecieved = 0;
+    long lastDataUpdated = 0;
     long lastPlotUpdated = 0;
 
     @Override
@@ -98,13 +94,18 @@ public class Tab3DrivenRoutePlot extends Fragment
 
     private void updatePlot(CaroloCarSensorData carData)
     {
-        if(carData.poseX == 0 && carData.poseY == 0 && System.currentTimeMillis() - lastDataRecieved > 5000)
+        if(carData.poseX == 0 && carData.poseY == 0 && System.currentTimeMillis() - lastDataUpdated > 5000)
         {
             xPosVals.clear();
             yPosVals.clear();
         }
-        xPosVals.add(carData.poseX);
-        yPosVals.add(carData.poseY);
+        // only keep track of data points with delta t greater than 0.25s to reduce amount of data points with barely any change
+        if(System.currentTimeMillis() - lastDataUpdated >= 100)
+        {
+            xPosVals.add(carData.poseX);
+            yPosVals.add(carData.poseY);
+            lastDataUpdated = System.currentTimeMillis();
+        }
 
         // improve performance by capping max. plot refresh rate and max. number of data points
         if(xPosVals.size() > 2000) reducePosPlotResolution();
@@ -116,7 +117,6 @@ public class Tab3DrivenRoutePlot extends Fragment
             plot.redraw();
             lastPlotUpdated = System.currentTimeMillis();
         }
-        lastDataRecieved = System.currentTimeMillis();
     }
 
     private void reducePosPlotResolution()

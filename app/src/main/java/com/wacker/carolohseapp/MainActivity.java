@@ -193,8 +193,8 @@ public class MainActivity extends AppCompatActivity
                 // Change dummy data and send new values as local broadcast every second
                 dummyData.posePsi = (dummyData.posePsi + 2) % 360;
                 dummyData.rotationYaw_K = (dummyData.rotationYaw_K+ 45 + 1) % 90 - 45;
-                dummyData.environmentUS_Front = (dummyData.environmentUS_Front + 0.1) % 6;
-                dummyData.environmentUS_Rear = (dummyData.environmentUS_Rear + 0.1) % 6;
+                dummyData.environmentUS_Front = (dummyData.environmentUS_Front + 0.01) % 1;
+                dummyData.environmentUS_Rear = (dummyData.environmentUS_Rear + 0.01) % 1;
                 dummyData.environmentIR_Side_Front = (dummyData.environmentIR_Side_Front + 0.01) % 0.5;
                 dummyData.environmentIR_Side_Rear = (dummyData.environmentIR_Side_Rear + 0.01) % 0.5;
                 dummyData.poseX = .2*i * Math.cos(.02 * i * Math.PI);

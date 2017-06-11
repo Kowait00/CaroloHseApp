@@ -125,7 +125,7 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the front distance sensors
-        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 1) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 0.1) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 220, 100, false, paint );
 
@@ -134,7 +134,7 @@ public class CarTopDownView extends View
         float ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 2) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 0.2) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 220, 100, false, paint );
 
@@ -143,7 +143,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 3) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Front > 0 && mCarData.environmentUS_Front < 0.3) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 220, 100, false, paint );
 
@@ -169,7 +169,7 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the rear distance sensors
-        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 1) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 0.1) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 45, 90, false, paint );
 
@@ -178,7 +178,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 2) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 0.2) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 45, 90, false, paint );
 
@@ -187,7 +187,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 3) paint.setColor(Color.RED);
+        if(mCarData.environmentUS_Rear > 0 && mCarData.environmentUS_Rear < 0.3) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 45, 90, false, paint );
 
@@ -214,7 +214,7 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the side front distance sensors
-        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.1) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.07) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 345, 10, false, paint );
 
@@ -223,7 +223,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.2) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.14) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 345, 10, false, paint );
 
@@ -232,7 +232,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.3) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Front > 0 && mCarData.environmentIR_Side_Front < 0.21) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 345, 10, false, paint );
 
@@ -263,7 +263,7 @@ public class CarTopDownView extends View
         paint.setStyle(Paint.Style.STROKE);
 
         // Draw the inner most arcs for the side rear distance sensors
-        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.1) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.07) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 5, 10, false, paint );
 
@@ -272,7 +272,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.2;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.2) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.14) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 5, 10, false, paint );
 
@@ -281,7 +281,7 @@ public class CarTopDownView extends View
         ovalScaling = (ovalRectBottomRightY-ovalRectTopLeftY)*(float)0.4;
         ovalRect.set(ovalRectTopLeftX-ovalScaling, ovalRectTopLeftY-ovalScaling, ovalRectBottomRightX+ovalScaling, ovalRectBottomRightY+ovalScaling);
 
-        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear< 0.3) paint.setColor(Color.RED);
+        if(mCarData.environmentIR_Side_Rear > 0 && mCarData.environmentIR_Side_Rear < 0.21) paint.setColor(Color.RED);
         else paint.setColor(Color.GREEN);
         canvas.drawArc(ovalRect, 5, 10, false, paint );
 
