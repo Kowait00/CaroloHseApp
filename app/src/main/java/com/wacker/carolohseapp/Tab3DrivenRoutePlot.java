@@ -94,7 +94,7 @@ public class Tab3DrivenRoutePlot extends Fragment
 
     private void updatePlot(CaroloCarSensorData carData)
     {
-        if(carData.poseX == 0 && carData.poseY == 0 && System.currentTimeMillis() - lastDataUpdated > 5000)
+        if(carData.poseX == 0 && carData.poseY == 0 && carData.movementV == 0)
         {
             xPosVals.clear();
             yPosVals.clear();

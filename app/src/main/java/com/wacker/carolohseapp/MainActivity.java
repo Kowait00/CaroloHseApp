@@ -201,6 +201,10 @@ public class MainActivity extends AppCompatActivity
                 dummyData.poseY = .2*i * Math.sin(.02 * i * Math.PI);
                 dummyData.movementV = (dummyData.movementV + (float)0.01) % 3;
                 dummyData.movementA = (dummyData.movementA + 0.05) % 5;
+
+                // make first iteration send empty object to ensure reset of plot
+                if(i == 0) dummyData = new CaroloCarSensorData();
+
                 i++;
 
                 Intent intent = new Intent(UdpReceiverService.UDPRECV_RESULT);

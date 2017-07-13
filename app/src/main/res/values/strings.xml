@@ -6,9 +6,10 @@
     <string name="action_test_data_stop">Testdaten stoppen</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="app_info_heading">it:movES\nAndroid App</string>
-    <string name="dev_info_text">Entwickelt in 2016\nvon Konstantin Wacker\n\nals Studienarbeit\nan der Hochschule Esslingen</string>
+    <string name="dev_info_text">Entwickelt von\nKonstantin Wacker\n\nals Studienarbeit\nan der Hochschule Esslingen</string>
     <string name="car_image_source_info_text">Grafik Pickup Truck:\n&#169;TRBRY\nopengameart.org/content/car-pickup</string>
     <string name="tire_tread_texture_source_info_text">Tire Tread Texture:\n&#169;seabranddesign\nVecteezy.com</string>
+    <string name="AndroidPlot_source_info_text">Graph Library:\n&#169;Androidplot\nandroidplot.com</string>
 
     <!-- Strings of raw data tab-->
     <string name="odometry_heading">Odometriedaten</string>

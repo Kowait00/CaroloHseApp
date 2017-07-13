@@ -40,10 +40,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_movementV_value"
-            android:layout_marginLeft="55dp"
-            android:layout_marginStart="55dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
             android:layout_alignTop="@+id/rawdata_movementV_label"
             android:layout_toRightOf="@+id/rawdata_posePsi_label"
             android:layout_toEndOf="@+id/rawdata_posePsi_label"/>
@@ -71,6 +73,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_movementA_value"
             android:layout_alignTop="@+id/rawdata_movementA_label"
@@ -100,6 +104,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_movementS_value"
             android:layout_alignTop="@+id/rawdata_movementS_label"
@@ -129,6 +135,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_poseX_value"
             android:layout_alignTop="@+id/rawdata_poseX_label"
@@ -157,6 +165,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_poseY_value"
             android:layout_alignTop="@+id/rawdata_poseY_label"
@@ -185,6 +195,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_posePsi_value"
             android:layout_alignTop="@+id/rawdata_posePsi_label"
@@ -213,6 +225,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_rotationPsi_K_value"
             android:layout_alignTop="@+id/rawdata_rotationPsi_K_Label"
@@ -241,6 +255,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_rotationPsi_Ko_value"
             android:layout_alignTop="@+id/rawdata_rotationPsi_Ko_label"
@@ -269,6 +285,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_rotationYaw_K_value"
             android:layout_alignTop="@+id/rawdata_rotationYaw_K_label"
@@ -297,6 +315,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_rotationYaw_Ko_value"
             android:layout_alignTop="@+id/rawdata_rotationYaw_Ko_label"
@@ -338,6 +358,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_environmentUS_Front_value"
             android:layout_alignTop="@+id/rawdata_environmentUS_Front_label"
@@ -366,6 +388,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_environmentUS_Rear_value"
             android:layout_alignTop="@+id/rawdata_environmentUS_Rear_label"
@@ -394,6 +418,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_environmentIR_Side_Front_value"
             android:layout_alignTop="@+id/rawdata_environmentIR_Side_Front_label"
@@ -422,6 +448,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_environmentIR_Side_Rear_value"
             android:layout_alignTop="@+id/rawdata_environmentIR_Side_Rear_label"
@@ -450,6 +478,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_environmentIR_Front_Left_value"
             android:layout_alignTop="@+id/rawdata_environmentIR_Front_Left_label"

@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/car_image_source_info_text"
             android:id="@+id/CarImageSourceInfoTextView"
-            android:layout_marginTop="77dp"
+            android:layout_marginTop="45dp"
             android:layout_below="@+id/DevInfoTextView"
             android:layout_centerHorizontal="true"/>
 
@@ -57,6 +57,17 @@
             android:layout_below="@+id/CarImageSourceInfoTextView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="19dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:paddingLeft="25dp"
+            android:layout_height="wrap_content"
+            android:text="@string/AndroidPlot_source_info_text"
+            android:id="@+id/AndroidPlotSourceTextView"
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/TireTreadTextureSourceInfoTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
     </RelativeLayout>
 </ScrollView>
