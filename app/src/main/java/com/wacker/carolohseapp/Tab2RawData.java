@@ -18,12 +18,12 @@ import java.util.Locale;
 /**
  * Created by wacke on 27.11.2016.
  */
-public class Tab3RawData extends Fragment
+public class Tab2RawData extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.tab3_rawdata, container, false);
+        View rootView = inflater.inflate(R.layout.tab2_rawdata, container, false);
 
         return rootView;
     }

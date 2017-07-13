@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by wacke on 27.11.2016.
  */
-public class Tab2DrivenRoutePlot extends Fragment
+public class Tab3DrivenRoutePlot extends Fragment
 {
     private XYPlot plot;
     private List<Double> xPosVals = new ArrayList<Double>();
@@ -41,7 +41,7 @@ public class Tab2DrivenRoutePlot extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.tab2_drivenrouteplot, container, false);
+        View rootView = inflater.inflate(R.layout.tab3_drivenrouteplot, container, false);
 
         // Register local broadcast receiver to receive broadcast of current vehicle data
         IntentFilter intentFilter = new IntentFilter();
