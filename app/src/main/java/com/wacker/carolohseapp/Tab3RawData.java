@@ -18,7 +18,7 @@ import java.util.Locale;
 /**
  * Created by wacke on 27.11.2016.
  */
-public class Tab2RawData extends Fragment
+public class Tab3RawData extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

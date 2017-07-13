@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by wacke on 27.11.2016.
  */
-public class Tab3DrivenRoutePlot extends Fragment
+public class Tab2DrivenRoutePlot extends Fragment
 {
     private XYPlot plot;
     private List<Double> xPosVals = new ArrayList<Double>();

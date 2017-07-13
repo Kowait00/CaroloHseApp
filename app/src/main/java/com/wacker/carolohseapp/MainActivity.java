@@ -145,11 +145,11 @@ public class MainActivity extends AppCompatActivity
                     Tab1Visualization tab1 = new Tab1Visualization();
                     return tab1;
                 case 1:
-                    Tab2RawData tab2 = new Tab2RawData();
-                    return tab2;
-                case 2:
-                    Tab3DrivenRoutePlot tab3 = new Tab3DrivenRoutePlot();
+                    Tab2DrivenRoutePlot tab3 = new Tab2DrivenRoutePlot();
                     return tab3;
+                case 2:
+                    Tab3RawData tab2 = new Tab3RawData();
+                    return tab2;
             }
             return null;
         }
@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity
                 case 0:
                     return "Übersicht";
                 case 1:
-                    return "Daten";
-                case 2:
                     return "Gefahrene Strecke";
+                case 2:
+                    return "Sensordaten";
             }
             return null;
         }
