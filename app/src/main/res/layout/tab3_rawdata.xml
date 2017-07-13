@@ -44,8 +44,8 @@
             android:minEms="3"
             android:text="0"
             android:id="@+id/rawdata_movementV_value"
-            android:layout_marginLeft="22dp"
-            android:layout_marginStart="22dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
             android:layout_alignTop="@+id/rawdata_movementV_label"
             android:layout_toRightOf="@+id/rawdata_posePsi_label"
             android:layout_toEndOf="@+id/rawdata_posePsi_label"/>

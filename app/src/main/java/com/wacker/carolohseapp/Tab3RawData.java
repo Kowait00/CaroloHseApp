@@ -23,7 +23,7 @@ public class Tab3RawData extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.tab2_rawdata, container, false);
+        View rootView = inflater.inflate(R.layout.tab3_rawdata, container, false);
 
         return rootView;
     }
